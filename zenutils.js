@@ -79,7 +79,7 @@ function vertical(lines = 25, color = "linen") {
 
 const ruler = {calculate_gap_between_horizontal_lines, calculate_gap_between_vertical_lines, horizontal, vertical};
 
-zen = {print, sleep, ruler};
+const zen = {print, sleep, ruler};
 
 // zen.prefix = "The world: ";
 // zen.print("hacking...", "#f09642");
