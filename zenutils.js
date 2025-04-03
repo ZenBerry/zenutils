@@ -39,7 +39,47 @@ function sleep(seconds) {
   }
 }
 
-zen = {print, sleep};
+function calculate_gap_between_horizontal_lines(lines = 25) {
+  return window.innerHeight / lines;
+}
+
+function calculate_gap_between_vertical_lines(lines = 25) {
+  return window.innerWidth / lines;
+}
+
+function horizontal(lines = 25, color = "linen") {
+  const gap_between_horizontal_lines = calculate_gap_between_horizontal_lines(lines);
+  for (let y = 0; y < window.innerHeight; y += gap_between_horizontal_lines) {
+    const line = document.createElement("div");
+    line.style.position = "fixed",
+    line.style.transform = `translateY(${y}px)`,
+    line.style.width = "100%";
+    line.style.height = "0";
+    line.style.borderTop = `1px solid ${color}`;
+    line.style.pointerEvents = "none";
+    line.style.zIndex = "9999";
+    document.body.appendChild(line);
+  }
+}
+
+function vertical(lines = 25, color = "linen") {
+  const gap_between_vertical_lines = calculate_gap_between_vertical_lines(lines);
+  for (let x = 0; x < window.innerWidth; x += gap_between_vertical_lines) {
+    const line = document.createElement("div");
+    line.style.position = "fixed";
+    line.style.transform = `translateX(${x}px)`,
+    line.style.height = "100%";
+    line.style.width = "0";
+    line.style.borderLeft = `1px solid ${color}`;
+    line.style.pointerEvents = "none";
+    line.style.zIndex = "9999";
+    document.body.appendChild(line);
+  }
+}
+
+const ruler = {calculate_gap_between_horizontal_lines, calculate_gap_between_vertical_lines, horizontal, vertical};
+
+zen = {print, sleep, ruler};
 
 // zen.prefix = "The world: ";
 // zen.print("hacking...", "#f09642");
@@ -48,3 +88,5 @@ zen = {print, sleep};
 // zen.sleep(3);
 
 // zen.print("hacked!", "#C1E6C6")
+
+// zen.ruler.horizontal(20, "linen");
